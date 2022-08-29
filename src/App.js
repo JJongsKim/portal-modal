@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import ModalBtn from "./components/modalBtn";
+import Modal from "./components/modal";
+import Portal from "./components/Portal";
 
 function App() {
+  const [onModal, setOnModal] = useState(false);
+
+  const clickModal = () => {
+    setOnModal(!onModal);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ModalBtn onOpen={clickModal} />
+      {onModal && (
+        <Portal>
+          <Modal onClose={clickModal} />
+        </Portal>
+      )}
+      {/* <Portal>
+        <Modal onClose={clickModal} />
+      </Portal> */}
+    </>
   );
 }
 
